@@ -1,4 +1,5 @@
-﻿using DotnetProjectAnalyzerDll;
+﻿using System.Threading.Channels;
+using DotnetProjectAnalyzerDll;
 
 namespace ConsoleApp;
 
@@ -8,13 +9,15 @@ internal static class Runner
     {
         var choiceIndex = 0;
         var arr = Code.RunItems(projectPath);
+        Console.WriteLine();
+        Console.WriteLine("*** LIST OF ITEMS ****************************");
         foreach (var runItem in arr)
         {
             choiceIndex++;
             runItem.ReCheck();
 
             Console.Write($"{choiceIndex}) {runItem.Title}: ");
-            if (runItem.IsFound)
+            if (runItem.ChangeNeedsDone)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("FOUND");
@@ -41,18 +44,18 @@ internal static class Runner
             {
                 var selectedItem = arr[choice - 1];
 
-                if (!selectedItem.IsFound)
+                if (!selectedItem.ChangeNeedsDone)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Item does not need done, choose another");
                     Console.ResetColor();
                     return true;
                 }
-                
+
                 Console.WriteLine($"Selected: {selectedItem.Title}");
                 Console.WriteLine("Do you want to continue? (y/n)");
                 Console.WriteLine();
-                
+
                 var confirmY = Console.ReadKey(true);
 
                 if (confirmY.Key == ConsoleKey.Y)

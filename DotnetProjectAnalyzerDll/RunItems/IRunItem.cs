@@ -2,7 +2,7 @@
 {
     public interface IRunItem
     {
-        bool IsFound { get; }
+        bool ChangeNeedsDone { get; }
         string Title { get; }
         void MakeChange()
         {

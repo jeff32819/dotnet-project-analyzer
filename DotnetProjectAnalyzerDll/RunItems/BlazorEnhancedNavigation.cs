@@ -11,14 +11,14 @@ public class BlazorEnhancedNavigation : IRunItem
     }
 
     public string Title => "Blazor Enhanced Navigation";
-    public bool IsFound { get; private set; }
+    public bool ChangeNeedsDone { get; private set; }
     public string Path { get; }
     private static string Pattern => @"<script\s+src=""@Assets\[""_framework/blazor\.web\.js""\]""></script>";
 
     public void ReCheck()
     {
         var contents = File.ReadAllText(Path);
-        IsFound = IsMatch(contents, Pattern);
+        ChangeNeedsDone = IsMatch(contents, Pattern);
     }
 
     public void MakeChange()
