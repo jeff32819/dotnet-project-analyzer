@@ -6,10 +6,11 @@ namespace DotnetProjectAnalyzerDll
     {
         public static List<IRunItem> RunItems(string projectPath)
         {
-            return new List<IRunItem>
-            {
-                new BlazorEnhancedNavigation(projectPath)
-            };
+            return
+            [
+                new BlazorEnhancedNavigation(projectPath),
+                new WeatherPageDefaultPage(projectPath)
+            ];
         }
         
     }

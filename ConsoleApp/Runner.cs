@@ -29,6 +29,7 @@ internal static class Runner
             }
 
             Console.ResetColor();
+            Console.WriteLine(); // complete line
         }
 
         Console.WriteLine();
