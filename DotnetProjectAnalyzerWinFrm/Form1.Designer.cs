@@ -33,7 +33,7 @@ partial class Form1
         // 
         // button1
         // 
-        button1.Location = new Point(165, 59);
+        button1.Location = new Point(28, 32);
         button1.Name = "button1";
         button1.Size = new Size(75, 23);
         button1.TabIndex = 0;
@@ -45,7 +45,7 @@ partial class Form1
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(800, 450);
+        ClientSize = new Size(309, 311);
         Controls.Add(button1);
         Name = "Form1";
         Text = "Form1";
