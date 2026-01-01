@@ -1,4 +1,11 @@
-﻿var rv =  DotnetProjectAnalyzerDll.BlazorWebJsTag.Analyze("t:\\");
-Console.WriteLine(rv.Found);
-Console.WriteLine(rv.TextAfterRemoval);
+﻿
+
+var arr = DotnetProjectAnalyzerDll.Code.RunItems("t:\\");
+foreach (var runItem in arr)
+{
+    Console.WriteLine(runItem.IsFound);
+    runItem.MakeChange();
+}
+
+Console.WriteLine();
 Console.WriteLine();
