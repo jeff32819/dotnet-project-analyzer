@@ -1,11 +1,12 @@
-﻿
+﻿using System.Runtime.CompilerServices;
+using ConsoleApp;
+using DotnetProjectAnalyzerDll;
 
-var arr = DotnetProjectAnalyzerDll.Code.RunItems("t:\\");
-foreach (var runItem in arr)
-{
-    Console.WriteLine(runItem.IsFound);
-    runItem.MakeChange();
-}
+
+
+while (Runner.Process("V:\\GitHub\\Jeff32819\\CruiseVacay\\BlazorDotNet9")) ;
+
+
 
 Console.WriteLine();
 Console.WriteLine();
