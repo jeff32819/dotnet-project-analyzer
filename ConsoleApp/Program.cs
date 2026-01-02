@@ -1,10 +1,10 @@
-﻿using System.Runtime.CompilerServices;
-using ConsoleApp;
-using DotnetProjectAnalyzerDll;
+﻿using ConsoleApp;
 
 
+const string projectPath = @"V:\GitHub\Jeff32819\CruiseVacay\BlazorDotNet9";
 
-while (Runner.Process("V:\\GitHub\\Jeff32819\\CruiseVacay\\BlazorDotNet9")) ;
+
+while (Runner.Process(projectPath)) ;
 
 
 
