@@ -2,23 +2,20 @@
 
 namespace DotnetProjectAnalyzerDll.RunItems;
 
-public class BlazorEnhancedNavigation : IRunItem
+public class BlazorEnhancedNavigation : BaseClass, IRunItem
 {
-    public BlazorEnhancedNavigation(string projectPath)
+    public BlazorEnhancedNavigation(Code.SuccessWhen successWhen, string projectPath) : base(successWhen, projectPath)
     {
-        Path = $@"{projectPath.TrimEnd('\\')}\Components\App.razor";
         ReCheck();
     }
-
     public string Title => "Blazor Enhanced Navigation";
-    public bool ChangeNeedsDone { get; private set; }
-    public string Path { get; }
+    public string Path => $@"{ProjectPath.TrimEnd('\\')}\Components\App.razor";
     private static string Pattern => @"<script\s+src=""@Assets\[""_framework/blazor\.web\.js""\]""></script>";
 
     public void ReCheck()
     {
         var contents = File.ReadAllText(Path);
-        ChangeNeedsDone = IsMatch(contents, Pattern);
+        IsFound = IsMatch(contents, Pattern);
     }
 
     public void MakeChange()

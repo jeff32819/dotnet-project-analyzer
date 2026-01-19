@@ -1,14 +1,13 @@
-﻿using System.Threading.Channels;
-using DotnetProjectAnalyzerDll;
+﻿using static DotnetProjectAnalyzerDll.Code;
 
 namespace ConsoleApp;
 
 internal static class Runner
 {
-    public static bool Process(string projectPath)
+    public static bool Process(SuccessWhenConfig config, string projectPath)
     {
         var choiceIndex = 0;
-        var arr = Code.RunItems(projectPath);
+        var arr = RunItems(config, projectPath);
         Console.WriteLine();
         Console.WriteLine("*** LIST OF ITEMS ****************************");
         foreach (var runItem in arr)
@@ -17,18 +16,12 @@ internal static class Runner
             runItem.ReCheck();
 
             Console.Write($"{choiceIndex}) {runItem.Title}: ");
-            if (runItem.ChangeNeedsDone)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("FOUND");
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("NOT FOUND");
-            }
-
+            Console.ForegroundColor = runItem.SuccessLogic ? ConsoleColor.Green : ConsoleColor.Red;
+            Console.Write(runItem.SuccessWhen);
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.Write($" - {(runItem.SuccessWhen == SuccessWhen.Found ? "Success If Found" : "Success If Not Found")}");
             Console.ResetColor();
+
             Console.WriteLine(); // complete line
         }
 
@@ -45,7 +38,7 @@ internal static class Runner
             {
                 var selectedItem = arr[choice - 1];
 
-                if (!selectedItem.ChangeNeedsDone)
+                if (!selectedItem.SuccessLogic)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Item does not need done, choose another");

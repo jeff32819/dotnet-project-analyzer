@@ -1,27 +1,23 @@
 ﻿namespace DotnetProjectAnalyzerDll.RunItems
 {
-    internal class WeatherPageDefaultPage : IRunItem
+    internal class WeatherPageDefaultPage : BaseClass, IRunItem
     {
-        public WeatherPageDefaultPage(string projectPath)
+        public WeatherPageDefaultPage(Code.SuccessWhen successWhen, string projectPath) :base(successWhen, projectPath)
         {
-            Path = $@"{projectPath.TrimEnd('\\')}\Components\Pages\Weather.razor";
             ReCheck();
         }
-
         public string Title => "Weather Page Default (delete page)";
-        public bool ChangeNeedsDone { get; private set; }
-        public string Path { get; }
-
+        public string Path=> $@"{ProjectPath.TrimEnd('\\')}\Components\Pages\Weather.razor";
         public void ReCheck()
         {
             if (!File.Exists(Path))
             {
-                ChangeNeedsDone = false;
+                IsFound = false;
                 return;
             }
             var contents = File.ReadAllText(Path);
             // check for text, just in case i created page with same name;
-            ChangeNeedsDone = contents.Contains("This component demonstrates showing data");
+            IsFound = contents.Contains("This component demonstrates showing data");
         }
 
         public void MakeChange()
